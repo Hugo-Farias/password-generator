@@ -1,3 +1,5 @@
+@import "variables";
+
 @font-face {
   font-family: "JetBrains Mono";
   src: url("./assets/fonts/JetBrainsMono-VariableFont_wght.ttf")
@@ -12,7 +14,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: #e6e5ea;
+  color: $color-font;
   background: linear-gradient(180deg, #14131b 0%, #08070b 100%);
 
   font-synthesis: none;

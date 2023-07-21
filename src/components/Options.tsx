@@ -1,13 +1,13 @@
 import "./Options.scss";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const Options = function () {
   const sliderRef = useRef<HTMLInputElement | null>(null);
   const [currentLen, setCurrentLen] = useState<number>(10);
 
-  useEffect(() => {
+  const handleInputChange = function () {
     setCurrentLen(+sliderRef.current?.value);
-  }, [sliderRef]);
+  };
 
   return (
     <div className="options">
@@ -17,6 +17,8 @@ const Options = function () {
       </div>
       <input
         ref={sliderRef}
+        value={currentLen}
+        onChange={handleInputChange}
         className="slider"
         type="range"
         id="slider"

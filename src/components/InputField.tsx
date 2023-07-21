@@ -7,7 +7,9 @@ function InputField() {
       <h1 className="title">Password Generator</h1>
       <div className="result">
         <h2 className="password">PTx1f5DaFX</h2>
-        <img alt="Copy Icon" src={copySvg} />
+        <button className="button-copy">
+          <img alt="Copy Icon" src={copySvg} />
+        </button>
       </div>
     </div>
   );
