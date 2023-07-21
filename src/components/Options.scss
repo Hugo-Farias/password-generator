@@ -23,14 +23,13 @@
     width: 100%;
     height: 0.5rem;
     appearance: none;
-    background-color: $color-primary;
 
     &:hover::-webkit-slider-thumb {
       background: darken($color-font, 20);
     }
 
     &::-webkit-slider-runnable-track {
-      -webkit-appearance: none;
+      //-webkit-appearance: none;
       //background-color: white;
     }
 

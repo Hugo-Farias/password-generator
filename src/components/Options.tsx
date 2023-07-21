@@ -1,9 +1,16 @@
 import "./Options.scss";
-import { useRef, useState } from "react";
+import { CSSProperties, useRef, useState } from "react";
 
 const Options = function () {
   const sliderRef = useRef<HTMLInputElement | null>(null);
   const [currentLen, setCurrentLen] = useState<number>(10);
+  const maxLength = sliderRef.current?.max;
+  const colorPrimary = "#a4ffaf";
+  const percentage = (currentLen / maxLength) * 100 - 2;
+
+  const inputStyle: CSSProperties = {
+    background: `linear-gradient(to right,${colorPrimary} 0,${colorPrimary} ${percentage}%,#18171F ${percentage}%,#18171F 100%)`,
+  };
 
   const handleInputChange = function () {
     setCurrentLen(+sliderRef.current?.value);
@@ -25,6 +32,7 @@ const Options = function () {
         min="1"
         max="20"
         step="1"
+        style={inputStyle}
       />
     </div>
   );
