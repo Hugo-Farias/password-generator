@@ -1,5 +1,31 @@
+@import "../variables";
+
 .input-field {
   & > .title {
-    font-size: 2.4rem;
+    @include flex-center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #817d92;
+  }
+
+  & > .result {
+    @include flex-center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+    flex-shrink: 0;
+    background-color: #24232c;
+
+    & > .password {
+      margin-top: 0.4rem;
+      font-size: 1.5rem;
+    }
+
+    & > img {
+      height: 2rem;
+    }
   }
 }
