@@ -4,9 +4,9 @@ import { CSSProperties, useRef, useState } from "react";
 const Options = function () {
   const sliderRef = useRef<HTMLInputElement | null>(null);
   const [currentLen, setCurrentLen] = useState<number>(10);
-  const maxLength = sliderRef.current?.max;
-  const colorPrimary = "#a4ffaf";
+  const maxLength = +sliderRef.current?.max || currentLen * 2;
   const percentage = (currentLen / maxLength) * 100 - 2;
+  const colorPrimary = "#a4ffaf";
 
   const inputStyle: CSSProperties = {
     background: `linear-gradient(to right,${colorPrimary} 0,${colorPrimary} ${percentage}%,#18171F ${percentage}%,#18171F 100%)`,
