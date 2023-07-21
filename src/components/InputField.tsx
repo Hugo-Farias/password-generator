@@ -3,7 +3,7 @@ import "./InputField.scss";
 function InputField() {
   return (
     <div className="input-field">
-      <p>TESdasdasdT</p>
+      <div className="title">Password Generator</div>
     </div>
   );
 }
