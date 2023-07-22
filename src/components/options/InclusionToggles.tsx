@@ -10,6 +10,7 @@ export interface stateT {
 
 interface propT {
   returnConditions: (v: stateT) => void;
+  stateInitial: stateT;
 }
 
 const stateInitial = {
@@ -27,7 +28,7 @@ const checkboxes: { name: string; label: string }[] = [
 ];
 
 const InclusionToggles = function (props: propT) {
-  const [checkState, setCheckState] = useState<stateT>(stateInitial);
+  const [checkState, setCheckState] = useState<stateT>(props.stateInitial);
 
   const handleCheck = function (e: string) {
     setCheckState((prev) => {

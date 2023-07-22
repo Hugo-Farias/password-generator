@@ -23,18 +23,28 @@ let passCondInitial: passCondT = {
 
 const Options = function () {
   const [levelScore, setLevelScore] = useState<number>(0);
-  // const [passCond, setPassCond] = useState<passCondT>(passCondInitial);
-  console.log("-> levelScore", passCondInitial);
+  const [buttonOn, setButtonOn] = useState<boolean>(false);
 
   const scoreCalculate = function (cond: passCondT) {
-    let score = cond.charLen / 8;
-    if (cond.charLen <= 3) score -= 2;
+    const { charLen, upper, lower, numbers, symbols } = cond;
+    console.log("-> cond", cond);
+
+    let score = charLen / 8;
+    if (charLen <= 4) score -= 2;
     // else if (cond.charLen > 4) setLevelScore(2);
 
-    if (cond.upper) score += 0.5;
-    if (cond.lower) score += 0.5;
-    if (cond.numbers) score += 0.8;
-    if (cond.symbols) score += 1;
+    if (!upper && !lower && !numbers && !symbols) {
+      // setLevelScore(0);
+      setButtonOn(false);
+      return null;
+    } else {
+      setButtonOn(true);
+    }
+
+    if (upper) score += 0.5;
+    if (lower) score += 0.5;
+    if (numbers) score += 0.8;
+    if (symbols) score += 0.8;
 
     setLevelScore(score);
   };
@@ -44,18 +54,22 @@ const Options = function () {
     if (typeof obj === "number") {
       newCond = { ...passCondInitial, charLen: obj };
     } else {
-      newCond = { ...passCondInitial, ...obj };
+      newCond = { ...obj, charLen: passCondInitial.charLen };
     }
     passCondInitial = newCond;
+    console.log(passCondInitial);
     scoreCalculate(passCondInitial);
   };
 
   return (
     <div className="options">
       <CharacterLength returnLength={handleReturnLength} />
-      <InclusionToggles returnConditions={handleReturnLength} />
+      <InclusionToggles
+        stateInitial={passCondInitial}
+        returnConditions={handleReturnLength}
+      />
       <Strength levelNumber={levelScore} />
-      <GenerateButton />
+      <GenerateButton buttonDisable={!buttonOn} />
     </div>
   );
 };

@@ -1,9 +1,13 @@
 import "./GenerateButton.scss";
 import arrowSVG from "../../assets/images/icon-arrow-right.svg";
 
-const GenerateButton = function () {
+interface propT {
+  buttonDisable: boolean;
+}
+
+const GenerateButton = function ({ buttonDisable }: propT) {
   return (
-    <button className="generate-button">
+    <button className="generate-button" disabled={buttonDisable}>
       <h3 className="button-label">Generate</h3>{" "}
       <img
         src={arrowSVG}
