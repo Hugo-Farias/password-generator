@@ -13,7 +13,7 @@ interface passCondT {
   symbols: boolean;
 }
 
-const passCondInitial: passCondT = {
+let passCondInitial: passCondT = {
   charLen: 10,
   upper: false,
   lower: false,
@@ -22,31 +22,32 @@ const passCondInitial: passCondT = {
 };
 
 const Options = function () {
-  const [levelScore, setLevelScore] = useState<number>(2);
-  const [passCond, setPassCond] = useState<passCondT>(passCondInitial);
-  console.log("-> passCond", passCond);
+  const [levelScore, setLevelScore] = useState<number>(0);
+  // const [passCond, setPassCond] = useState<passCondT>(passCondInitial);
+  console.log("-> levelScore", passCondInitial);
 
   const scoreCalculate = function (cond: passCondT) {
-    if (cond.charLen <= 4) setLevelScore(1);
-    else if (cond.charLen > 4) setLevelScore(2);
+    let score = cond.charLen / 8;
+    if (cond.charLen <= 3) score -= 2;
+    // else if (cond.charLen > 4) setLevelScore(2);
 
-    if (cond.upper) setLevelScore(5);
+    if (cond.upper) score += 0.5;
+    if (cond.lower) score += 0.5;
+    if (cond.numbers) score += 0.8;
+    if (cond.symbols) score += 1;
+
+    setLevelScore(score);
   };
 
   const handleReturnLength = function (obj: number | stateT) {
+    let newCond: passCondT;
     if (typeof obj === "number") {
-      setPassCond((prev) => {
-        const newCond = { ...prev, charLen: obj };
-        scoreCalculate(newCond);
-        return newCond;
-      });
+      newCond = { ...passCondInitial, charLen: obj };
     } else {
-      setPassCond((prev) => {
-        const newCond = { ...prev, ...obj };
-        scoreCalculate(newCond);
-        return newCond;
-      });
+      newCond = { ...passCondInitial, ...obj };
     }
+    passCondInitial = newCond;
+    scoreCalculate(passCondInitial);
   };
 
   return (
