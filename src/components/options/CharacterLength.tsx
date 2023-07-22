@@ -7,9 +7,10 @@ const CharacterLength = function () {
   const maxLength = +sliderRef.current?.max || currentLen * 2;
   const percentage = (currentLen / maxLength) * 100 - 2;
   const colorPrimary = "#a4ffaf";
+  const colorNull = "#18171F";
 
   const inputStyle: CSSProperties = {
-    background: `linear-gradient(to right,${colorPrimary} 0,${colorPrimary} ${percentage}%, #18171F ${percentage}%, #18171F 100%)`,
+    background: `linear-gradient(to right,${colorPrimary} 0,${colorPrimary} ${percentage}%, ${colorNull} ${percentage}%, ${colorNull} 100%)`,
   };
 
   const handleInputChange = function () {

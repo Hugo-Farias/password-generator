@@ -1,0 +1,36 @@
+@import "../../variables";
+
+.inclusion-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  & > .checkbox-container {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    cursor: pointer;
+
+    & > .checkbox {
+      transition: all 0.2s ease-in-out;
+      transition-property: background-color, border;
+      border: 0.2rem solid $color-font;
+      background-color: $color-window;
+      height: 2.3rem;
+      aspect-ratio: 1;
+
+      &.true {
+        background-color: $color-primary;
+        border: transparent;
+        background-image: url("../../assets/images/icon-check.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 1.8rem;
+      }
+    }
+
+    & > .label {
+      font-size: 1.5rem;
+    }
+  }
+}
