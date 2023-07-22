@@ -6,15 +6,22 @@
   gap: 0.7rem;
 
   & > .checkbox-container {
+    transition: background-color 0.2s ease-in-out;
     display: flex;
     gap: 1.6rem;
+    padding: 0.3rem 0;
     align-items: center;
     cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
 
     & > .checkbox {
       transition: all 0.2s ease-in-out;
       transition-property: background-color, border;
       border: 0.2rem solid $color-font;
+      border-radius: 0.3rem;
       background-color: $color-window;
       height: 2.3rem;
       aspect-ratio: 1;
@@ -26,11 +33,13 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: 1.8rem;
+        background-position-y: 0.4rem;
       }
     }
 
     & > .label {
-      font-size: 1.5rem;
+      font-size: 1.15rem;
+      font-weight: 700;
     }
   }
 }

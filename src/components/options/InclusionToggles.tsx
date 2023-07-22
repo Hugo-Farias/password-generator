@@ -27,7 +27,6 @@ const InclusionToggles = function () {
 
   const handleCheck = function (e: string) {
     setCheckState((prev) => {
-      console.log(checkState);
       return { ...prev, [e]: !checkState[e] };
     });
   };

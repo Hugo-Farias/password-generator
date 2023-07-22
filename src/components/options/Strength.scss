@@ -1,7 +1,41 @@
 @import "../../variables";
 
 .strength {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 4.5rem;
-  width: 10rem;
-  background-color: $color-primary;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background-color: $color-null;
+
+  & > .label {
+    color: $color-litegrey;
+    font-size: 1.12rem;
+  }
+
+  & > .level {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    & > .level-name {
+      font-size: 1.5rem;
+    }
+
+    & > .pips-container {
+      display: flex;
+      gap: 0.5rem;
+      & > .pip {
+        //position: absolute;
+        height: 1.75rem;
+        aspect-ratio: 0.36;
+        border: 0.1rem solid $color-font;
+
+        &.filled {
+          background-color: #f8cd65;
+          border: none;
+        }
+      }
+    }
+  }
 }
