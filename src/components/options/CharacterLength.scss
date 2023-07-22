@@ -23,7 +23,9 @@
     appearance: none;
 
     &:hover::-webkit-slider-thumb {
-      background: darken($color-font, 20);
+      //background: darken($color-font, 20);
+      background-color: $color-null;
+      outline: 0.2rem solid $color-primary;
     }
 
     &::-webkit-slider-runnable-track {
@@ -32,6 +34,8 @@
     }
 
     &::-webkit-slider-thumb {
+      transition: all 0.2s ease-in-out;
+      transition-property: background-color;
       -webkit-appearance: none;
       height: 2.4rem;
       aspect-ratio: 1;

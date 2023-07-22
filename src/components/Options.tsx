@@ -1,14 +1,53 @@
 import "./Options.scss";
+import { useState } from "react";
 import CharacterLength from "./options/CharacterLength";
-import InclusionToggles from "./options/InclusionToggles";
+import InclusionToggles, { stateT } from "./options/InclusionToggles";
 import Strength from "./options/Strength";
+import GenerateButton from "./options/GenerateButton";
+
+interface passCondT {
+  charLen: number;
+  upper: boolean;
+  lower: boolean;
+  numbers: boolean;
+  symbols: boolean;
+}
+
+const passCondInitial: passCondT = {
+  charLen: 10,
+  upper: false,
+  lower: false,
+  numbers: false,
+  symbols: false,
+};
 
 const Options = function () {
+  const [levelScore, setLevelScore] = useState<number>(2);
+  const [passCond, setPassCond] = useState<passCondT>(passCondInitial);
+  console.log("-> passCond", passCond);
+
+  const scoreCalculate = function (cond: passCondT) {
+    if (cond.charLen <= 4) setLevelScore(1);
+    else if (cond.charLen > 4) setLevelScore(2);
+
+    if (cond.upper) setLevelScore(5);
+  };
+
+  const handleReturnLength = function (obj: number | stateT) {
+    if (typeof obj === "number") {
+      setPassCond((prev) => ({ ...prev, charLen: obj }));
+    } else {
+      setPassCond((prev) => ({ ...prev, ...obj }));
+    }
+    scoreCalculate(passCond);
+  };
+
   return (
     <div className="options">
-      <CharacterLength />
-      <InclusionToggles />
-      <Strength />
+      <CharacterLength returnLength={handleReturnLength} />
+      <InclusionToggles returnConditions={handleReturnLength} />
+      <Strength levelNumber={levelScore} />
+      <GenerateButton />
     </div>
   );
 };

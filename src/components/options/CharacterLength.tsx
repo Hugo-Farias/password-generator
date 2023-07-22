@@ -1,11 +1,15 @@
 import "./CharacterLength.scss";
 import { CSSProperties, useRef, useState } from "react";
 
-const CharacterLength = function () {
+interface propT {
+  returnLength: (len: number) => void;
+}
+
+const CharacterLength = function (prop: propT) {
   const sliderRef = useRef<HTMLInputElement | null>(null);
   const [currentLen, setCurrentLen] = useState<number>(10);
   const maxLength = +sliderRef.current?.max || currentLen * 2;
-  const percentage = (currentLen / maxLength) * 100 - 2;
+  const percentage = (currentLen / maxLength) * 100;
   const colorPrimary = "#a4ffaf";
   const colorNull = "#18171F";
 
@@ -14,7 +18,9 @@ const CharacterLength = function () {
   };
 
   const handleInputChange = function () {
-    setCurrentLen(+sliderRef.current!.value);
+    const newCurrent = +sliderRef.current!.value;
+    setCurrentLen(newCurrent);
+    prop.returnLength(newCurrent);
   };
 
   return (
@@ -30,7 +36,7 @@ const CharacterLength = function () {
         className="slider"
         type="range"
         id="slider"
-        min="1"
+        min="0"
         max="20"
         step="1"
         style={inputStyle}
