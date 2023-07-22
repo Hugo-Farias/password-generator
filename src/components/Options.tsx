@@ -35,11 +35,18 @@ const Options = function () {
 
   const handleReturnLength = function (obj: number | stateT) {
     if (typeof obj === "number") {
-      setPassCond((prev) => ({ ...prev, charLen: obj }));
+      setPassCond((prev) => {
+        const newCond = { ...prev, charLen: obj };
+        scoreCalculate(newCond);
+        return newCond;
+      });
     } else {
-      setPassCond((prev) => ({ ...prev, ...obj }));
+      setPassCond((prev) => {
+        const newCond = { ...prev, ...obj };
+        scoreCalculate(newCond);
+        return newCond;
+      });
     }
-    scoreCalculate(passCond);
   };
 
   return (
