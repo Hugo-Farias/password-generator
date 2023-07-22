@@ -1,9 +1,9 @@
-import "./InputField.scss";
+import "./ResultField.scss";
 import copySvg from "../assets/images/icon-copy.svg";
 
-function InputField() {
+function ResultField() {
   return (
-    <div className="input-field">
+    <div className="result-field">
       <h1 className="title">Password Generator</h1>
       <div className="result">
         <h2 className="password">PTx1f5DaFX</h2>
@@ -15,4 +15,4 @@ function InputField() {
   );
 }
 
-export default InputField;
+export default ResultField;

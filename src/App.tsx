@@ -1,11 +1,11 @@
 import "./App.scss";
-import InputField from "./components/InputField";
+import ResultField from "./components/ResultField";
 import Options from "./components/Options";
 
 function App() {
   return (
     <div className="app">
-      <InputField />
+      <ResultField />
       <Options />
     </div>
   );
