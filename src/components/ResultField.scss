@@ -82,6 +82,10 @@
         transform: translateX(-6rem);
         cursor: default;
         pointer-events: none;
+
+        @media (max-width: 400px) {
+          transform: translate(-1.4rem, 1.8rem);
+        }
       }
 
       &.true {

@@ -9,8 +9,8 @@ export function passwordGenerator(condObj: passCondT) {
 
   const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowerChars = "abcdefghijklmnopqrstuvwxyz";
-  const numChars = "0123456789".repeat(3);
-  const symChars = "!@#$%&*()_-+=".repeat(2);
+  const numChars = "0123456789".repeat(5);
+  const symChars = "!@#$%&*()_-+=".repeat(4);
 
   if (upper) chars += upperChars;
   if (lower) chars += lowerChars;

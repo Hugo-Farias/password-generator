@@ -8,6 +8,7 @@ type propT = {
 
 function ResultField({ password }: propT) {
   const [buttonAnim, setButtonAnim] = useState<boolean>(false);
+  let timeout;
 
   const handleCopyClick = function () {
     setButtonAnim(true);
@@ -22,7 +23,9 @@ function ResultField({ password }: propT) {
         // Handle any errors that may occur during the copy process
       });
 
-    setTimeout(() => setButtonAnim(false), 1800);
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => setButtonAnim(false), 1800);
   };
 
   return (
