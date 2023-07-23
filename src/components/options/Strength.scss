@@ -1,5 +1,14 @@
 @import "../../variables";
 
+@keyframes slide-down {
+  0% {
+    transform: translateX(-4%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .strength {
   display: flex;
   justify-content: space-between;
@@ -33,6 +42,7 @@
         border: 0.1rem solid $color-font;
 
         &.filled {
+          animation: slide-down 0.2s forwards ease-in-out;
           border: none;
         }
       }

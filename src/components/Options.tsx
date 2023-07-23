@@ -27,19 +27,9 @@ const Options = function () {
 
   const scoreCalculate = function (cond: passCondT) {
     const { charLen, upper, lower, numbers, symbols } = cond;
-    console.log("-> cond", cond);
 
-    let score = charLen / 8;
-    if (charLen <= 4) score -= 2;
-    // else if (cond.charLen > 4) setLevelScore(2);
-
-    if (!upper && !lower && !numbers && !symbols) {
-      // setLevelScore(0);
-      setButtonOn(false);
-      return null;
-    } else {
-      setButtonOn(true);
-    }
+    let score = charLen / 10;
+    // if (charLen <= 4) score -= 2;
 
     if (upper) score += 0.5;
     if (lower) score += 0.5;
@@ -50,6 +40,7 @@ const Options = function () {
   };
 
   const handleReturnLength = function (obj: number | stateT) {
+    console.log("-> obj", obj);
     let newCond: passCondT;
     if (typeof obj === "number") {
       newCond = { ...passCondInitial, charLen: obj };
@@ -57,7 +48,15 @@ const Options = function () {
       newCond = { ...obj, charLen: passCondInitial.charLen };
     }
     passCondInitial = newCond;
-    console.log(passCondInitial);
+
+    const { charLen, upper, lower, numbers, symbols } = passCondInitial;
+
+    if (charLen === 0 || (!upper && !lower && !numbers && !symbols)) {
+      setButtonOn(false);
+      return null;
+    } else {
+      setButtonOn(true);
+    }
     scoreCalculate(passCondInitial);
   };
 

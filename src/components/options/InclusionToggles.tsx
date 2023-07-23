@@ -1,5 +1,5 @@
 import "./InclusionToggles.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface stateT {
   upper: boolean;
@@ -13,13 +13,6 @@ interface propT {
   stateInitial: stateT;
 }
 
-const stateInitial = {
-  upper: false,
-  lower: false,
-  numbers: false,
-  symbols: false,
-};
-
 const checkboxes: { name: string; label: string }[] = [
   { name: "upper", label: "Include Uppercase Letters" },
   { name: "lower", label: "Include Lowercase Letters" },
@@ -31,12 +24,12 @@ const InclusionToggles = function (props: propT) {
   const [checkState, setCheckState] = useState<stateT>(props.stateInitial);
 
   const handleCheck = function (e: string) {
-    setCheckState((prev) => {
-      const newCond = { ...prev, [e]: !checkState[e] };
-      props.returnConditions(newCond);
-      return newCond;
-    });
+    setCheckState((prev) => ({ ...prev, [e]: !checkState[e] }));
   };
+
+  useEffect(() => {
+    props.returnConditions(checkState);
+  }, [checkState]);
 
   const checkJSX = checkboxes.map((v, i) => {
     return (

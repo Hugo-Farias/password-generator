@@ -5,11 +5,15 @@ interface propT {
   returnLength: (len: number) => void;
 }
 
+// Ajust the range of the slider and initial value
+const min = 4;
+const max = min ** 2;
+const initial = (min + max) / 2;
+
 const CharacterLength = function (prop: propT) {
+  const [currentLen, setCurrentLen] = useState<number>(initial);
   const sliderRef = useRef<HTMLInputElement | null>(null);
-  const [currentLen, setCurrentLen] = useState<number>(10);
-  const maxLength = +sliderRef.current?.max || currentLen * 2;
-  const percentage = (currentLen / maxLength) * 100;
+  const percentage = ((currentLen - min) / (max - min)) * 100;
   const colorPrimary = "#a4ffaf";
   const colorNull = "#18171F";
 
@@ -36,8 +40,8 @@ const CharacterLength = function (prop: propT) {
         className="slider"
         type="range"
         id="slider"
-        min="0"
-        max="20"
+        min={min}
+        max={max}
         step="1"
         style={inputStyle}
       />
