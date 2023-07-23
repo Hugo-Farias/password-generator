@@ -1,11 +1,13 @@
 import "./Options.scss";
 import { useState } from "react";
+import InclusionToggles from "./options/InclusionToggles";
 import CharacterLength from "./options/CharacterLength";
-import InclusionToggles, { stateT } from "./options/InclusionToggles";
 import Strength from "./options/Strength";
 import GenerateButton from "./options/GenerateButton";
+import { passwordGenerator } from "../helper";
+import passwordEntropy from "fast-password-entropy/es5";
 
-interface passCondT {
+export interface passCondT {
   charLen: number;
   upper: boolean;
   lower: boolean;
@@ -39,25 +41,31 @@ const Options = function () {
     setLevelScore(score);
   };
 
-  const handleReturnLength = function (obj: number | stateT) {
-    console.log("-> obj", obj);
+  const handleReturnLength = function (obj: number | passCondT) {
     let newCond: passCondT;
+
     if (typeof obj === "number") {
       newCond = { ...passCondInitial, charLen: obj };
     } else {
       newCond = { ...obj, charLen: passCondInitial.charLen };
     }
+
     passCondInitial = newCond;
 
     const { charLen, upper, lower, numbers, symbols } = passCondInitial;
-
     if (charLen === 0 || (!upper && !lower && !numbers && !symbols)) {
       setButtonOn(false);
       return null;
-    } else {
-      setButtonOn(true);
     }
+
+    setButtonOn(true);
     scoreCalculate(passCondInitial);
+  };
+
+  const handleGenerate = function () {
+    const password = passwordGenerator(passCondInitial);
+    console.log(password);
+    console.log(passwordEntropy(password));
   };
 
   return (
@@ -68,7 +76,7 @@ const Options = function () {
         returnConditions={handleReturnLength}
       />
       <Strength levelNumber={levelScore} />
-      <GenerateButton buttonDisable={!buttonOn} />
+      <GenerateButton onClick={handleGenerate} buttonDisable={!buttonOn} />
     </div>
   );
 };

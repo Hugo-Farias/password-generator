@@ -1,16 +1,10 @@
 import "./InclusionToggles.scss";
 import { useEffect, useState } from "react";
-
-export interface stateT {
-  upper: boolean;
-  lower: boolean;
-  numbers: boolean;
-  symbols: boolean;
-}
+import { passCondT } from "../Options";
 
 interface propT {
-  returnConditions: (v: stateT) => void;
-  stateInitial: stateT;
+  returnConditions: (v: passCondT) => void;
+  stateInitial: passCondT;
 }
 
 const checkboxes: { name: string; label: string }[] = [
@@ -21,7 +15,7 @@ const checkboxes: { name: string; label: string }[] = [
 ];
 
 const InclusionToggles = function (props: propT) {
-  const [checkState, setCheckState] = useState<stateT>(props.stateInitial);
+  const [checkState, setCheckState] = useState<passCondT>(props.stateInitial);
 
   const handleCheck = function (e: string) {
     setCheckState((prev) => ({ ...prev, [e]: !checkState[e] }));
