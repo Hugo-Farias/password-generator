@@ -8,20 +8,11 @@ type propT = {
 
 function ResultField({ password }: propT) {
   const [buttonAnim, setButtonAnim] = useState<boolean>(false);
-  let timeout;
+  let timeout: number;
 
   const handleCopyClick = function () {
     setButtonAnim(true);
-    navigator.clipboard
-      .writeText(password || "")
-      .then(() => {
-        console.log("Text copied to clipboard: " + password);
-        // Optionally, show a success message or provide some visual feedback
-      })
-      .catch((error) => {
-        console.error("Failed to copy text: ", error);
-        // Handle any errors that may occur during the copy process
-      });
+    navigator.clipboard.writeText(password || "");
 
     clearTimeout(timeout);
 

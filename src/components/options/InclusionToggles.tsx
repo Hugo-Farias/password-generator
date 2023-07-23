@@ -7,7 +7,9 @@ type propT = {
   stateInitial: passCondT;
 };
 
-const checkboxes: { name: string; label: string }[] = [
+type conditionsTypes = "upper" | "lower" | "numbers" | "symbols";
+
+const checkboxes: { name: conditionsTypes; label: string }[] = [
   { name: "upper", label: "Include Uppercase Letters" },
   { name: "lower", label: "Include Lowercase Letters" },
   { name: "numbers", label: "Include Numbers" },
@@ -17,8 +19,8 @@ const checkboxes: { name: string; label: string }[] = [
 const InclusionToggles = function (props: propT) {
   const [checkState, setCheckState] = useState<passCondT>(props.stateInitial);
 
-  const handleCheck = function (e: string) {
-    setCheckState((prev) => ({ ...prev, [e]: !checkState[e] }));
+  const handleCheck = function (e: conditionsTypes) {
+    setCheckState((prev) => ({ ...prev, [e]: !prev[e] }));
   };
 
   useEffect(() => {
