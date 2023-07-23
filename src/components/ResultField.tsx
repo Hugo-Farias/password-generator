@@ -11,8 +11,11 @@ function ResultField({ password }: propT) {
   let timeout: number;
 
   const handleCopyClick = function () {
+    if (password === null) return;
+
     setButtonAnim(true);
-    navigator.clipboard.writeText(password || "");
+
+    navigator.clipboard.writeText(password);
 
     clearTimeout(timeout);
 

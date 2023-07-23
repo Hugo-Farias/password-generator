@@ -5,7 +5,9 @@ import CharacterLength from "./options/CharacterLength";
 import Strength from "./options/Strength";
 import GenerateButton from "./options/GenerateButton";
 import { passwordGenerator } from "../helper";
-import passwordEntropy from "fast-password-entropy/es5";
+import passwordEntropy from "fast-password-entropy";
+
+console.log("-> passwordEntropy", passwordEntropy);
 
 type propT = {
   returnPassword: (pass: string) => void;
