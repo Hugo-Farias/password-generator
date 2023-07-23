@@ -1,11 +1,12 @@
 import "./Strength.scss";
 import { ReactNode } from "react";
 
-interface propT {
+type propT = {
   levelNumber: number;
-}
+};
 
 const levelStyle: { [n: string]: { color: string; name: string } } = {
+  0: { color: "", name: "" },
   1: { color: "#F64A4A", name: "Too Weak!" },
   2: { color: "#FB7C58", name: "Weak" },
   3: { color: "#F8CD65", name: "Medium" },
@@ -16,7 +17,7 @@ const Strength = function (props: propT) {
   let level = Math.floor(props.levelNumber);
 
   if (level > 4) level = 4;
-  else if (level < 1) level = 1;
+  else if (level < 1) level = 0;
 
   const pipsJSX: ReactNode[] = [];
 

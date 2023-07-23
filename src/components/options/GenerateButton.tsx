@@ -1,10 +1,10 @@
 import "./GenerateButton.scss";
 import arrowSVG from "../../assets/images/icon-arrow-right.svg";
 
-interface propT {
+type propT = {
   onClick: () => void;
   buttonDisable: boolean;
-}
+};
 
 const GenerateButton = function ({ buttonDisable, onClick }: propT) {
   return (

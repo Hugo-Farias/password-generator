@@ -1,5 +1,19 @@
 @import "../variables";
 
+@keyframes slow-reveal {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
 .result-field {
   $padding: 2rem;
   $height: 5rem;
@@ -24,11 +38,21 @@
 
     & > .password {
       margin-top: 0.4rem;
-      font-size: 1.7rem;
+      font-size: 2.6rem;
+
+      @media (max-width: 400px) {
+        font-size: 2rem;
+      }
+
+      &.null:before {
+        content: "P4$5W0rD!";
+        color: darken($color-litegrey, 20);
+      }
     }
 
     & > .button-copy {
       transition: filter 0.2s ease-in-out;
+      font-family: inherit;
       background-color: transparent;
       //background-color: red;
       position: absolute;
@@ -42,6 +66,34 @@
         //background-color: rgba(255, 255, 255, 0.15);
         filter: grayscale(100);
       }
+
+      &:before {
+        //transition: opacity 0.5s ease-in-out;
+        content: "copied";
+        text-transform: uppercase;
+        position: absolute;
+        color: $color-primary;
+        opacity: 0;
+        font-weight: 700;
+        height: 0;
+        background-color: gray;
+        top: 1.5rem;
+        //left: -4rem;
+        transform: translateX(-6rem);
+        cursor: default;
+        pointer-events: none;
+      }
+
+      &.true {
+        color: $color-primary;
+        filter: unset;
+
+        &:before {
+          animation: slow-reveal 2s forwards ease-in-out;
+          //opacity: 1;
+        }
+      }
+
       & > img {
         height: 2rem;
         aspect-ratio: 1;

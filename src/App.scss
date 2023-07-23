@@ -1,14 +1,17 @@
 @import "variables";
 
 .app {
+  position: absolute;
   display: flex;
   flex-direction: column;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
   gap: 1rem;
-  //transform: translateY(10%);
-  margin-top: 3rem;
   margin-inline: auto;
   max-width: 52rem;
   min-width: 32rem;
+  width: 100%;
   padding: 1rem;
   overflow: hidden;
   //outline: 1px solid rgba(245, 245, 245, 0.13);

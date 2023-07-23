@@ -1,9 +1,9 @@
 import "./CharacterLength.scss";
 import { CSSProperties, useRef, useState } from "react";
 
-interface propT {
+type propT = {
   returnLength: (len: number) => void;
-}
+};
 
 // Ajust the range of the slider and initial value
 const min = 4;

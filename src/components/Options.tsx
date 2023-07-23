@@ -7,13 +7,17 @@ import GenerateButton from "./options/GenerateButton";
 import { passwordGenerator } from "../helper";
 import passwordEntropy from "fast-password-entropy/es5";
 
-export interface passCondT {
+type propT = {
+  returnPassword: (pass: string) => void;
+};
+
+export type passCondT = {
   charLen: number;
   upper: boolean;
   lower: boolean;
   numbers: boolean;
   symbols: boolean;
-}
+};
 
 let passCondInitial: passCondT = {
   charLen: 10,
@@ -23,7 +27,7 @@ let passCondInitial: passCondT = {
   symbols: false,
 };
 
-const Options = function () {
+const Options = function (props: propT) {
   const [levelScore, setLevelScore] = useState<number>(0);
   const [buttonOn, setButtonOn] = useState<boolean>(false);
 
@@ -55,6 +59,8 @@ const Options = function () {
     if (score > 50) setLevelScore(2);
     if (score > 70) setLevelScore(3);
     if (score > 90) setLevelScore(4);
+
+    props.returnPassword(password);
   };
 
   return (

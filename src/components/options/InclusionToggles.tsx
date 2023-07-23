@@ -2,10 +2,10 @@ import "./InclusionToggles.scss";
 import { useEffect, useState } from "react";
 import { passCondT } from "../Options";
 
-interface propT {
+type propT = {
   returnConditions: (v: passCondT) => void;
   stateInitial: passCondT;
-}
+};
 
 const checkboxes: { name: string; label: string }[] = [
   { name: "upper", label: "Include Uppercase Letters" },

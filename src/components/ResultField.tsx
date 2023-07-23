@@ -1,15 +1,39 @@
 import "./ResultField.scss";
 import copySvg from "../assets/images/icon-copy.svg";
+import { useState } from "react";
 
-function ResultField() {
+type propT = {
+  password: string | null;
+};
+
+function ResultField({ password }: propT) {
+  const [buttonAnim, setButtonAnim] = useState<boolean>(false);
+
+  const handleCopyClick = function () {
+    setButtonAnim(true);
+    navigator.clipboard
+      .writeText(password || "")
+      .then(() => {
+        console.log("Text copied to clipboard: " + password);
+        // Optionally, show a success message or provide some visual feedback
+      })
+      .catch((error) => {
+        console.error("Failed to copy text: ", error);
+        // Handle any errors that may occur during the copy process
+      });
+
+    setTimeout(() => setButtonAnim(false), 1800);
+  };
+
   return (
     <div className="result-field">
       <h1 className="title">Password Generator</h1>
       <div className="result">
-        <h2 className="password" placeholder="P4$5W0rD!">
-          PTx1f5DaFX
-        </h2>
-        <button className="button-copy">
+        <h2 className={`password ${password}`}>{password}</h2>
+        <button
+          className={`button-copy ${buttonAnim}`}
+          onClick={handleCopyClick}
+        >
           <img alt="Copy Icon" src={copySvg} />
         </button>
       </div>
