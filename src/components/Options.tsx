@@ -27,20 +27,6 @@ const Options = function () {
   const [levelScore, setLevelScore] = useState<number>(0);
   const [buttonOn, setButtonOn] = useState<boolean>(false);
 
-  const scoreCalculate = function (cond: passCondT) {
-    const { charLen, upper, lower, numbers, symbols } = cond;
-
-    let score = charLen / 10;
-    // if (charLen <= 4) score -= 2;
-
-    if (upper) score += 0.5;
-    if (lower) score += 0.5;
-    if (numbers) score += 0.8;
-    if (symbols) score += 0.8;
-
-    setLevelScore(score);
-  };
-
   const handleReturnLength = function (obj: number | passCondT) {
     let newCond: passCondT;
 
@@ -59,13 +45,16 @@ const Options = function () {
     }
 
     setButtonOn(true);
-    scoreCalculate(passCondInitial);
   };
 
   const handleGenerate = function () {
     const password = passwordGenerator(passCondInitial);
-    console.log(password);
-    console.log(passwordEntropy(password));
+    const score = passwordEntropy(password);
+
+    if (score < 50) setLevelScore(1);
+    if (score > 50) setLevelScore(2);
+    if (score > 70) setLevelScore(3);
+    if (score > 90) setLevelScore(4);
   };
 
   return (
